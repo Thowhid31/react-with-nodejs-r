@@ -18,7 +18,19 @@ function App() {
     const user = {name, email}
 
     //post data to server
-    console.log(name, email);
+    fetch('http://localhost:5000/user', {
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(res=>res.json())
+    .then(data => {
+      const newUsers = [...users, data];
+      setUsers(newUsers);
+      console.log(data);
+    })
   }
 
   return (
